@@ -54,30 +54,38 @@
 <div id="loginpop" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
+      <div class="panel-heading">
+        <div class="row">
+          <ul class="menu">
+            <div class="col-xs-6">
+              <a href="#" id="login-form-link">Login</a>
+            </div>
+            <div class="col-xs-6">
+              <a href="#" id="register-form-link">Register</a>
+            </div>
+          </ul>
+        </div>
+          <hr>
+      </div>
       <div class="row">
-        <div class="col-sm-6 login">
+        <div class="col-sm-12 login">
         <h4>Login</h4>
           <form class="" role="form">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail2">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword2">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Remember me
-          </label>
-        </div>
-        <button type="submit" class="btn btn-success">Sign in</button>
-      </form>          
-        </div>
-        <div class="col-sm-6">
-          <h4>New User Sign Up</h4>
-          <p>Join today and get updated with all the properties deal happening around.</p>
-          <button type="submit" class="btn btn-info"  onclick="window.location.href='register.php'">Join Now</button>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputPassword2">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div>
+          </form>       
+            <button type="submit" class="btn btn-success">Sign in</button>   
         </div>
 
       </div>
