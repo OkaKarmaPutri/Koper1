@@ -24,6 +24,26 @@
     
 <!-- slitslider -->
 
+<style type="text/css">
+  #login-form-link, #register-form-link{
+    background-color: white;
+    border: 2px solid #72b70f;
+    color: black; 
+    padding: 16px 64px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  #login-form-link:hover, #register-form-link:hover{
+    background-color: #72b70f;
+    color: white;
+  }
+</style>
 </head>
 
 <body>
@@ -63,10 +83,6 @@
 
     </div>
 <!-- #Header Starts -->
-
-
-
-
 
 <div class="container">
 

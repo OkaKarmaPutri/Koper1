@@ -1,6 +1,3 @@
-
-
-
 <div class="footer">
 
 <div class="container">
@@ -69,8 +66,27 @@
       </div>
       <div class="row">
         <div class="col-sm-12 login">
-        <h4>Login</h4>
-          <form class="" role="form">
+          <form class="" id="login-form" role="form" style="display: block">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2"></label>
+              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Username or Email">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputPassword2">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>   
+          </form>
+          <form class="" id="register-form" role="form" style="display: none">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+            </div>
             <div class="form-group">
               <label class="sr-only" for="exampleInputEmail2">Email address</label>
               <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
@@ -84,8 +100,9 @@
                 <input type="checkbox"> Remember me
               </label>
             </div>
-          </form>       
             <button type="submit" class="btn btn-success">Sign in</button>   
+          </form>       
+            
         </div>
 
       </div>
@@ -129,6 +146,21 @@
   $("#login").click(function(){
     $("#loginpop").modal('show');
   })
+
+  $('#login-form-link').click(function(e) {
+    $("#login-form").delay(100).fadeIn(100);
+    $("#register-form").fadeOut(100);
+    $('#register-form-link').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
+  });
+  $('#register-form-link').click(function(e) {
+    $("#register-form").delay(100).fadeIn(100);
+    $("#login-form").fadeOut(100);
+    $('#login-form-link').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
+  });
 </script>
 </html>
 
