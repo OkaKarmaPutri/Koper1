@@ -48,6 +48,13 @@
 
 <body>
 
+<?php 
+  $page = 'home';
+
+  if(isset($_GET['page'])){
+    $page = $_GET['page'];
+  }
+?>
 
 <!-- Header Starts -->
 <div class="navbar-wrapper">
@@ -98,7 +105,10 @@
 <!-- #Header Starts -->
 </div>
 
-<?php include 'pages/home.php'; ?>
+<?php 
+  if($page = 'home')
+    include 'pages/home.php';
+?>
 
 <div class="footer">
 
