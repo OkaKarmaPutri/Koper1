@@ -43,12 +43,19 @@
     background-color: #72b70f;
     color: white;
   }
+
+  body{background:#eee;font-family:Verdana, Helvetica, Arial, sans-serif;margin:0;padding:0}
+.example{background:#FFF;width:1000px;font-size:80%;border:1px #000 solid;margin:0.5em 10% 0.5em;padding:1em 2em 2em;-moz-border-radius:3px;-webkit-border-radius:3px}
+#content p{text-indent:20px;text-align:justify;}
+#pagingControls ul{display:inline;padding-left:0.5em}
+#pagingControls li{display:inline;padding:0 0.5em}
 </style>
 </head>
 
 <body>
 
 <?php 
+  include '../database/koneksi.php';
   $page = 'home';
 
   if(isset($_GET['page'])){
@@ -98,16 +105,20 @@
 <a href="index.php"><img src="images/logo.jpg" width="18%" alt="Realestate"></a>
 
               <ul class="pull-right">
-                <li><a href="buysalerent.php">Rumah</a></li>
-                <li><a href="buysalerent.php">Kos</a></li>
+                <li><a href="index.php?page=property">Rumah</a></li>
+                <li><a href="index.php?page=property">Kos</a></li>
               </ul>
 </div>
 <!-- #Header Starts -->
 </div>
 
-<?php 
-  if($page = 'home')
+<?php
+  if($page == 'home'){
     include 'pages/home.php';
+  }
+  elseif($page == 'property'){
+    include 'pages/buysalerent.php';
+  }
 ?>
 
 <div class="footer">
@@ -221,6 +232,7 @@
   <script type="text/javascript" src="assets/slitslider/js/modernizr.custom.79639.js"></script>
   <script type="text/javascript" src="assets/slitslider/js/jquery.ba-cond.min.js"></script>
   <script type="text/javascript" src="assets/slitslider/js/jquery.slitslider.js"></script>
+  <script type="text/javascript" src="js/pagination.js"></script>
 
 <script type="text/javascript">
   function login1(){
@@ -245,5 +257,16 @@
     $(this).addClass('active');
     e.preventDefault();
   });
+
+  var pager = new Imtech.Pager();
+  $(document).ready(function() {
+      pager.paragraphsPerPage = 5; // set amount elements per page
+      pager.pagingContainer = $('#content'); // set of main container
+      pager.paragraphs = $('div.z', pager.pagingContainer); // set of required containers
+      pager.showPage(1);
+  });
+
+
+
 </script>
 </html>
