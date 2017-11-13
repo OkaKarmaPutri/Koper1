@@ -111,9 +111,9 @@
                 <div class="status sold">Sold</div>
               </div>
               <h4><a href="property-detail.php"><?php echo $a['NAMA_PROPERTY'] ?></a></h4>
-              <p class="price"><?php echo "Rp".$a['HARGA'] ?></p>
+              <p class="price">Price: <?php echo "Rp".$a['HARGA'] ?></p>
               <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="property-detail.php">View Details</a>
+              <a class="btn btn-primary" href="?page=detail">View Details</a>
             </div>
             </div>
             <!-- properties -->

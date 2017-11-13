@@ -22,15 +22,23 @@ Imtech.Pager = function() {
         renderControls(this.pagingControlsContainer, this.currentPage, this.numPages());
     }
     var renderControls = function(container, currentPage, numPages) {
-        var pagingControls = 'Page: <ul>';
-        for (var i = 1; i <= numPages; i++) {
+        var pagingControls = '<a href="#" onclick="pager.showPage(' + 1 + '); return false;">&laquo;</a>', i = 1;
+        if(currentPage >= 4)
+            i = currentPage - 2;
+        if(currentPage + 1 >= numPages && numPages >= 5)
+            i = numPages - 4;
+        if(numPages <= 5)
+            j = numPages;
+        else
+            j = i + 4;
+        for (i ; i <= j; i++) {
             if (i != currentPage) {
-                pagingControls += '<li><a href="#" onclick="pager.showPage(' + i + '); return false;">' + i + '</a></li>';
+                pagingControls += '<a href="#" onclick="pager.showPage(' + i + '); return false;">' + i + '</a>';
             } else {
-                pagingControls += '<li>' + i + '</li>';
+                pagingControls += '<a href="#" onclick="pager.showPage(' + i + '); return false;" class="active">' + i + '</a>';
             }
         }
-        pagingControls += '</ul>';
+        pagingControls += '<a href="#" onclick="pager.showPage(' + numPages + '); return false;">&raquo;</a>';
         $(container).html(pagingControls);
     }
 }

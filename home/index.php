@@ -44,11 +44,26 @@
     color: white;
   }
 
-  body{background:#eee;font-family:Verdana, Helvetica, Arial, sans-serif;margin:0;padding:0}
-.example{background:#FFF;width:1000px;font-size:80%;border:1px #000 solid;margin:0.5em 10% 0.5em;padding:1em 2em 2em;-moz-border-radius:3px;-webkit-border-radius:3px}
-#content p{text-indent:20px;text-align:justify;}
-#pagingControls ul{display:inline;padding-left:0.5em}
-#pagingControls li{display:inline;padding:0 0.5em}
+  #pagingControls a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+
+  #pagingControls a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  #pagingControls a:hover:not(.active) {
+    background-color: #ddd;}
+  }
+
+  #pagingControls ul li:hover:not(.active) {
+    background-color: #ddd;
+  }
 </style>
 </head>
 
@@ -105,8 +120,8 @@
 <a href="index.php"><img src="images/logo.jpg" width="18%" alt="Realestate"></a>
 
               <ul class="pull-right">
-                <li><a href="index.php?page=property">Rumah</a></li>
-                <li><a href="index.php?page=property">Kos</a></li>
+                <li><a href="?page=property">Rumah</a></li>
+                <li><a href="?page=property">Kos</a></li>
               </ul>
 </div>
 <!-- #Header Starts -->
@@ -119,6 +134,8 @@
   elseif($page == 'property'){
     include 'pages/buysalerent.php';
   }
+  elseif($page == 'detail')
+    include 'pages/property-detail.php';
 ?>
 
 <div class="footer">
@@ -260,7 +277,7 @@
 
   var pager = new Imtech.Pager();
   $(document).ready(function() {
-      pager.paragraphsPerPage = 5; // set amount elements per page
+      pager.paragraphsPerPage = 10; // set amount elements per page
       pager.pagingContainer = $('#content'); // set of main container
       pager.paragraphs = $('div.z', pager.pagingContainer); // set of required containers
       pager.showPage(1);
