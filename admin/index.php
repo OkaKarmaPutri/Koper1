@@ -364,7 +364,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?php if($page == 'user')  echo'active'?>"><a href="index.php?page=user"><i class="fa fa-circle-o"></i>User</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li class="<?php if($page == 'pembeli')  echo'active'?>"><a href="index.php?page=pembeli"><i class="fa fa-circle-o"></i> Pembeli</a></li>
           </ul>
         </li>
       </ul>
@@ -380,7 +380,10 @@
         include "pages/home.php";
       else if($page == 'user')
         include 'pages/user.php';
-      include "pages/form.php";
+      else if($page == 'pembeli')
+        include 'pages/pembeli.php';
+      include "pages/modals.php";
+      include "ajax/user.php";
     ?>
   </div>
 
@@ -430,7 +433,6 @@
 <script src="assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- page script -->
 
-<script src="ajax/ajax.js"></script>
 <script>
   $(function () {
     $('#example1').DataTable()

@@ -35,7 +35,7 @@
                   <th width="200">Aksi</th>
                 </tr>
                 </thead>
-                <tbody class="dataUser">
+                <tbody>
                 
                 </tbody>
                 <tfoot>

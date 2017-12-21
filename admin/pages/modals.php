@@ -43,7 +43,7 @@
                       <label for="foto" class="col-sm-2 control-label">Foto</label>
 
                       <div class="col-sm-10">
-                        <input type="file" class="form-control" name="ft" id="foto" placeholder="Password">
+                        <input type="file" class="form-control" required name="ft" id="foto" placeholder="Password">
                       </div>
                     </div>
                   </div>
