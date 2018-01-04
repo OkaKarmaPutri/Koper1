@@ -1,14 +1,13 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        Data Pembeli
       </h1>
-      <ol class="breadcrumb">
+      <!--ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Data tables</li>
-      </ol>
+      </ol-->
     </section>
 
     <!-- Main content -->
@@ -18,7 +17,6 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
               <p></p>
               <button class="btn btn-primary" id="addData">Insert Data</button>
             </div>
@@ -28,24 +26,26 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Username</th>
+                  <th>Nama</th>
+                  <th>Alamat</th>
+                  <th>Jenis Kelamin</th>
+                  <th>No HP</th>
                   <th>Email</th>
-                  <th>Gambar</th>
-                  <th>Role</th>
-                  <th width="200">Aksi</th>
+                  <th width="100">Aksi</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="data">
                 
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>Username</th>
+                  <th>Nama</th>
+                  <th>Alamat</th>
+                  <th>Jenis Kelamin</th>
+                  <th>No HP</th>
                   <th>Email</th>
-                  <th>Gambar</th>
-                  <th>Role</th>
-                  <th width="200">Aksi</th>
+                  <th width="100">Aksi</th>
                 </tr>
                 </tfoot>
               </table>

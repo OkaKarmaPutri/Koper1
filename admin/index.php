@@ -1,3 +1,6 @@
+<?php 
+  include('../database/koneksi.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +43,11 @@
 
   <!-- DataTables -->
   <link rel="stylesheet" href="assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+  <link rel="stylesheet" type="text/css" href="assets/swal/dist/sweetalert.css">
+
+  <!-- jQuery 3 -->
+<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -355,7 +363,7 @@
             </span>
           </a>
         </li>
-        <li class="treeview <?php if($page == 'user') echo'active'?>">
+        <li class="treeview <?php if($page == 'user' || $page == 'pembeli' || $page == 'properti' || $page == 'transaksi' || $page == 'detail_properti') echo'active'?>">
           <a href="#">
             <i class="fa fa-table"></i> <span>Data</span>
             <span class="pull-right-container">
@@ -364,7 +372,19 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?php if($page == 'user')  echo'active'?>"><a href="index.php?page=user"><i class="fa fa-circle-o"></i>User</a></li>
-            <li class="<?php if($page == 'pembeli')  echo'active'?>"><a href="index.php?page=pembeli"><i class="fa fa-circle-o"></i> Pembeli</a></li>
+            <li class="<?php if($page == 'pembeli')  echo'active'?>"><a href="index.php?page=pembeli"><i class="fa fa-circle-o"></i>Pembeli</a></li>
+            <li class="treeview <?php if($page == 'properti' || $page == 'detail_properti')  echo'active'?>">
+              <a href="#"><i class="fa fa-circle-o"></i>Properti
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php if($page == 'properti')  echo'active'?>"><a href="index.php?page=properti"><i class="fa fa-circle-o"></i>Properti</a></li>
+                <li class="<?php if($page == 'detail_properti')  echo'active'?>"><a href="index.php?page=detail_properti"><i class="fa fa-circle-o"></i>Detail Properti</a></li>
+              </ul>
+            </li>
+            <li class="<?php if($page == 'transaksi')  echo'active'?>"><a href="index.php?page=transaksi"><i class="fa fa-circle-o"></i>Transaksi</a></li>
           </ul>
         </li>
       </ul>
@@ -378,12 +398,30 @@
     <?php
       if($page == 'home')
         include "pages/home.php";
-      else if($page == 'user')
-        include 'pages/user.php';
-      else if($page == 'pembeli')
-        include 'pages/pembeli.php';
-      include "pages/modals.php";
-      include "ajax/user.php";
+      else if($page == 'user'){
+        include 'pages/data/user.php';
+        include "pages/modals/modals_user.php";
+        include "ajax/ajax_user.php";
+      }
+      else if($page == 'pembeli'){
+        include 'pages/data/pembeli.php';
+        include "pages/modals/modals_pembeli.php";
+        include "ajax/ajax_pembeli.php";
+      }
+      else if($page == 'properti'){
+        include 'pages/data/properti/properti.php';
+        include "pages/modals/modals_properti.php";
+        include "ajax/ajax_properti.php";
+      }
+      else if($page == 'detail_properti'){
+        include 'pages/data/properti/detail_properti.php';
+        include "ajax/ajax_properti.php";
+      }
+      else if($page == 'transaksi'){
+        include 'pages/data/transaksi.php';
+        include "pages/modals/modals_transaksi.php";
+        include "ajax/ajax_transaksi.php";
+      }
     ?>
   </div>
 
@@ -392,8 +430,7 @@
 </div>
 <!-- ./wrapper -->
 </body>
-<!-- jQuery 3 -->
-<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -433,6 +470,8 @@
 <script src="assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- page script -->
 
+<script type="text/javascript" src="assets/swal/dist/sweetalert.min.js"></script>
+
 <script>
   $(function () {
     $('#example1').DataTable()
@@ -448,7 +487,5 @@
     
      $.widget.bridge('uibutton', $.ui.button);
   })
-
-  viewUser();
 </script>
 </html>
