@@ -14,7 +14,6 @@
 				'id'		=> $a['ID'],
 				'nama'		=> $a['NAMA'],
 				'alamat'	=> $a['ALAMAT'],
-				'jns'		=> $a['JNS'],
 				'no_hp'		=> $a['NO_HP'],
 				'email'		=> $a['EMAIL']
 				);
@@ -25,14 +24,12 @@
 	else if($crud == 'insert'){
 		$nm = $_POST['nm'];
 		$al = $_POST['al'];
-		$jns = $_POST['jns'];
 		$hp = $_POST['hp'];
 		$em = $_POST['em'];
 		$query = mysqli_query($koneksi, "INSERT into $table set
 			NAMA	= '$nm',
 			ALAMAT  = '$al',
 			EMAIL	= '$em',
-			JNS		= '$jns',
 			NO_HP	= '$hp'")
 			or die(mysqli_error($koneksi));
 	}
@@ -45,7 +42,6 @@
 				'id'		=> $a['ID'],
 				'nama'		=> $a['NAMA'],
 				'alamat'	=> $a['ALAMAT'],
-				'jns'		=> $a['JNS'],
 				'no_hp'		=> $a['NO_HP'],
 				'email'		=> $a['EMAIL']
 				);
@@ -57,14 +53,12 @@
 		$id = $_POST['id'];
 		$nm = $_POST['nm'];
 		$al = $_POST['al'];
-		$jns = $_POST['jns'];
 		$hp = $_POST['hp'];
 		$em = $_POST['em'];
 		$query = mysqli_query($koneksi, "UPDATE $table set
 			NAMA		= '$nm',
 			ALAMAT  	= '$al',
 			EMAIL		= '$em',
-			JNS			= '$jns',
 			NO_HP		= '$hp'
 			where ID 	= $id")
 			or die(mysqli_error($koneksi));

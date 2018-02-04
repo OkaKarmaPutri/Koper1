@@ -28,18 +28,6 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="jns" class="col-sm-2 control-label">Jenis Kelamin</label>
-
-                      <div class="col-sm-10">
-                        <select name="jns" id="jns" class="form-control" style="width: 100%;">
-                          <option>--Pilih--</option>
-                          <option>Laki-laki</option>
-                          <option>Perempuan</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
                       <label for="hp" class="col-sm-2 control-label">Nomor HP</label>
 
                       <div class="col-sm-10">

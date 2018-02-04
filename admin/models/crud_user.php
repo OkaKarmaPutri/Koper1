@@ -13,15 +13,19 @@
 			$data[count($data)] = array(
 				'id'		=> $a['ID'],
 				'username'	=> $a['USERNAME'],
+				'nama'		=> $a['nama'],
 				'role'		=> $a['ROLE'],
 				'gambar'	=> $a['GAMBAR'],
-				'email'		=> $a['EMAIL']
+				'email'		=> $a['EMAIL'],
+				'hp'		=> $a['no_hp']
 				);
 		}
 		echo json_encode($data);
 	}
 
 	else if($crud == 'insert'){
+		$hp = $_POST['hp'];
+		$nama = $_POST['nama'];
 		$us = $_POST['us'];
 		$em = $_POST['em'];
 		$ps = md5($_POST['ps']);
@@ -50,10 +54,8 @@
 			    		mkdir("../../images/".$a_i);
 			    	}
 			        $filename = date('YmdHis').$_FILES["ft"]["name"];
-			        echo "Upload: " . $_FILES["ft"]["name"] . "<br>";
-			        echo "Type: " . $_FILES["ft"]["type"] . "<br>";
-			        echo "Size: " . ($_FILES["ft"]["size"] / 1024) . " kB<br>";
-			        echo "Temp file: " . $_FILES["ft"]["tmp_name"] . "<br>";
+			        // echo "Size: " . ($_FILES["ft"]["size"] / 1024) . " kB<br>";
+			        // echo "Temp file: " . $_FILES["ft"]["tmp_name"] . "<br>";
 			        if (file_exists("../../images/".$a_i."/".$filename)) {
 			            echo $filename . " already exists. ";
 			        }
@@ -66,6 +68,8 @@
 		}
 			
 		$query = mysqli_query($koneksi, "INSERT into $table set
+			nama 		= '$nama',
+			no_hp 		= '$hp',
 			USERNAME	= '$us',
 			GAMBAR      = '$filename',
 			EMAIL		= '$em',
@@ -91,20 +95,23 @@
 
 	else if($crud == 'tampil_edit'){
 		$query = mysqli_query($koneksi, "select * from $table where ID = '$_POST[id]'") or die(mysqli_error($koneksi));
-		// echo json_encode(mysqli_fetch_array($query, MYSQLI_ASSOC));
 		$data = array();
 		while($a = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 			$data[count($data)] = array(
 				'id'		=> $a['ID'],
 				'username'	=> $a['USERNAME'],
 				'email'		=> $a['EMAIL'],
-				'gambar'	=> $a['GAMBAR']
+				'gambar'	=> $a['GAMBAR'],
+				'nama'		=> $a['nama'],
+				'hp'		=> $a['no_hp']
 				);
 		}
 		echo json_encode($data);
 	}
 
 	else if($crud == 'update'){
+		$hp = $_POST['hp'];
+		$nama = $_POST['nama'];
 		$us = $_POST['us'];
 		$id = $_POST['id'];
 		$em = $_POST['em'];
@@ -128,10 +135,8 @@
 				   		mkdir("../../images/".$id);
 				   	}
 				    $filename = date('YmdHis').$_FILES["ft"]["name"];
-				    echo "Upload: " . $_FILES["ft"]["name"] . "<br>";
-			        echo "Type: " . $_FILES["ft"]["type"] . "<br>";
-			        echo "Size: " . ($_FILES["ft"]["size"] / 1024) . " kB<br>";
-			        echo "Temp file: " . $_FILES["ft"]["tmp_name"] . "<br>";
+			        // echo "Size: " . ($_FILES["ft"]["size"] / 1024) . " kB<br>";
+			        // echo "Temp file: " . $_FILES["ft"]["tmp_name"] . "<br>";
 
 			        if (file_exists("../../images/".$id."/".$filename)) {
 			            echo $filename . " already exists. ";
@@ -143,18 +148,25 @@
 			            "../../images/".$id."/".$filename);
 			            echo "Stored in: " . "../../images/" . $filename;
 				    }
+
+				    $query = mysqli_query($koneksi, "UPDATE $table set
+				    	nama 		= '$nama',
+						no_hp 		= '$hp',
+						USERNAME	= '$us',
+						GAMBAR      = '$filename',
+						EMAIL		= '$em',
+						PASSWORD	= '$ps'
+						where ID 	= '$id'
+						") or die(mysqli_error($koneksi));
 	    		}	
 			}
-			$query = mysqli_query($koneksi, "UPDATE $table set
-				USERNAME	= '$us',
-				GAMBAR      = '$filename',
-				EMAIL		= '$em',
-				PASSWORD	= '$ps'
-				where ID 	= '$id'
-				") or die(mysqli_error($koneksi));
+			else
+				echo "Bukan Gambar";
 		}
 		else{
 			$query = mysqli_query($koneksi, "UPDATE $table set
+				nama 		= '$nama',
+				no_hp 		= '$hp',
 				USERNAME	= '$us',
 				EMAIL		= '$em',
 				PASSWORD	= '$ps'
@@ -167,6 +179,16 @@
 		$id = $_POST['id'];
 		$dir = "../../images/".$id;
 		rrmdir($dir);
+
+		$query = mysqli_query($koneksi, "SELECT ID from properti where ID_USERNAME = '$id'") or die(mysqli_error($koneksi));
+
+		while($a = mysqli_fetch_assoc($query)){
+			mysqli_query($koneksi, "DELETE from tb_harga where id_properti = '$a[ID]'") or die(mysqli_error($koneksi));
+			mysqli_query($koneksi, "DELETE from gmbr_properti where id_properti = '$a[ID]'") or die(mysqli_error($koneksi));
+			mysqli_query($koneksi, "DELETE from detail_fasilitas where id_properti = '$a[ID]'") or die(mysqli_error($koneksi));
+		}
+
+		mysqli_query($koneksi, "DELETE from properti where ID_USERNAME = '$id'") or die(mysqli_error($koneksi));
 		mysqli_query($koneksi, "DELETE from $table where ID = '$id'") or die(mysqli_error($koneksi));
 	}
 

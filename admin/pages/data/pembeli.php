@@ -28,7 +28,6 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>Alamat</th>
-                  <th>Jenis Kelamin</th>
                   <th>No HP</th>
                   <th>Email</th>
                   <th width="100">Aksi</th>
@@ -42,7 +41,6 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>Alamat</th>
-                  <th>Jenis Kelamin</th>
                   <th>No HP</th>
                   <th>Email</th>
                   <th width="100">Aksi</th>

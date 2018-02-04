@@ -27,8 +27,10 @@
                 <tr>
                   <th>No</th>
                   <th>Username</th>
+                  <th>Nama</th>
                   <th>Email</th>
                   <th>Gambar</th>
+                  <th>No HP</th>
                   <th>Role</th>
                   <th width="100">Aksi</th>
                 </tr>
@@ -40,8 +42,10 @@
                 <tr>
                   <th>No</th>
                   <th>Username</th>
+                  <th>Nama</th>
                   <th>Email</th>
                   <th>Gambar</th>
+                  <th>No HP</th>
                   <th>Role</th>
                   <th width="100">Aksi</th>
                 </tr>

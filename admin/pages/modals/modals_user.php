@@ -13,7 +13,6 @@
                     <input type="hidden" name="id" value="0">
                     <input type="hidden" name="ft_lama">
                     <input type="hidden" name="us_lama">
-                    <input type="hidden" name="result" value="0">
                     <div class="form-group">
                       <label for="us" class="col-sm-2 control-label">Username</label>
 
@@ -22,6 +21,14 @@
                       </div>
                       <div class="col-sm-2"></div>
                       <div class="col-sm-10"><label style="color: red; display: none" id="cek_us"></label></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="nama" class="col-sm-2 control-label">Nama</label>
+
+                      <div class="col-sm-10">
+                        <input type="text" name="nama" class="form-control" id="nama">
+                      </div>
                     </div>
 
                     <div class="form-group">
@@ -47,10 +54,20 @@
                         <input type="password" name="reps" class="form-control" id="reps">
                       </div>
                     </div>
+
                     <div class="form-group">
-                      <div class="col-sm-2 foto" style="display: none"></div>
-                      <div class="col-sm-10 foto" style="display: none"><img height="200px"></div>
+                      <label for="hp" class="col-sm-2 control-label">Nomor HP</label>
+
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="hp" id="hp">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
                       <label for="foto" class="col-sm-2 control-label">Foto</label>
+                      
+                      <div class="col-sm-10 foto" style="display: none"><img height="200px"></div>
+                      <div class="col-sm-2 foto" style="display: none"></div>
 
                       <div class="col-sm-10">
                         <input type="file" class="form-control" name="ft" id="foto">

@@ -11,6 +11,7 @@
                 <form class="form-horizontal" id="form">
                   <div class="box-body">
                     <input type="hidden" name="id" value="0">
+                    <input type="hidden" name="us_hidden">
                     <div class="form-group">
                       <label for="us" class="col-sm-2 control-label">Username</label>
 
@@ -112,14 +113,11 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
-                      <div class="col-sm-2 foto" style="display: none"></div>
-                      <div class="col-sm-10 foto" style="display: none"><img height="200px"></div>
-
+                    <div class="form-group ft">
                       <label class="col-sm-2 control-label">Foto</label>
 
                       <div class="col-sm-9">
-                        <input type="file" class="form-control" name="ft">
+                        <input type="file" class="form-control" name="ft[0]">
                       </div>
                       <div class="col-sm-1 control-label">
                         <button type="button" onclick="addFt()">+</button>
@@ -127,6 +125,10 @@
                     </div>
 
                     <div id="ft"></div>
+
+                    <div id="gmbr">
+                      <div class="form-group"></div>
+                    </div>
 
                   </div>
                 </form>

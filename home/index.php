@@ -1,7 +1,48 @@
+<?php 
+  session_start();
+  include '../database/koneksi.php';
+
+  if(!isset($_SESSION['koper']))
+    $page = 'home';
+
+  if(isset($_POST['signin'])){
+    $us = $_POST['us'];
+    $ps = md5($_POST['pass']);
+
+    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE USERNAME = '$us' AND PASSWORD = '$ps'") or die(mysqli_error($koneksi));
+    $cek = mysqli_num_rows($query);
+
+    if($cek > 0){
+      $data = mysqli_fetch_array($query);
+      $nama = $data['nama'];
+
+      $_SESSION['koper']['us'] = $us;
+      $_SESSION['koper']['nama'] = $nama;
+    }
+  }
+
+  if(isset($_POST['register'])){
+    $us     = $_POST['us'];
+    $nm     = $_POST['nm'];
+    $em     = $_POST['em'];
+    $hp     = $_POST['hp'];
+    $pass   = $_POST['pass'];
+    $cpass  = $_POST['cpass'];
+
+    // $query = mysqli_query($koneksi, "SELECT ")
+  }
+
+  $page = 'home';
+
+  if(isset($_GET['page'])){
+    $page = $_GET['page'];
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Realestate Bootstrap Theme </title>
+<title>Koper</title>
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -69,15 +110,6 @@
 
 <body>
 
-<?php 
-  include '../database/koneksi.php';
-  $page = 'home';
-
-  if(isset($_GET['page'])){
-    $page = $_GET['page'];
-  }
-?>
-
 <!-- Header Starts -->
 <div class="navbar-wrapper">
 
@@ -99,10 +131,21 @@
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
               <ul class="nav navbar-nav navbar-right">
-               <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="#" id="login">Login</a></li>
-                <li><a href="">register</a></li>
+               <li><a href="index.php">Home</a></li>
+                <li><a href="index.php?page=kontak">Contact</a></li>
+                <?php 
+                if(isset($_SESSION['koper'])){
+                  ?>
+                  <li><a href="#"><?php echo $_SESSION['koper']['nama'] ?></a></li>
+                  <li><a href="aksi/aksi_logout.php">Logout</a></li>
+                  <?php
+                }
+                else{
+                  ?>
+                  <li><a href="#" id="login">Login</a></li>
+                  <?php
+                }
+                ?>
               </ul>
             </div>
             <!-- #Nav Ends -->
@@ -120,8 +163,8 @@
 <a href="index.php"><img src="images/logo.jpg" width="18%" alt="Realestate"></a>
 
               <ul class="pull-right">
-                <li><a href="?page=property">Rumah</a></li>
-                <li><a href="?page=property">Kos</a></li>
+                <li><a href="?page=property&tipe=Rumah">Rumah</a></li>
+                <li><a href="?page=property&tipe=Kos">Kos</a></li>
               </ul>
 </div>
 <!-- #Header Starts -->
@@ -136,6 +179,8 @@
   }
   elseif($page == 'detail')
     include 'pages/property-detail.php';
+  else if($page == 'kontak')
+    include 'page/contact.php';
 ?>
 
 <div class="footer">
@@ -149,8 +194,6 @@
                    <h4>Information</h4>
                    <ul class="row">
                 <li class="col-lg-12 col-sm-12 col-xs-3"><a href="about.php">About</a></li>
-                <li class="col-lg-12 col-sm-12 col-xs-3"><a href="agents.php">Agents</a></li>         
-                <li class="col-lg-12 col-sm-12 col-xs-3"><a href="blog.php">Blog</a></li>
                 <li class="col-lg-12 col-sm-12 col-xs-3"><a href="contact.php">Contact</a></li>
               </ul>
             </div>
@@ -161,14 +204,6 @@
                     <form class="form-inline" role="form">
                             <input type="text" placeholder="Enter Your email address" class="form-control">
                                 <button class="btn btn-success" type="button">Notify Me!</button></form>
-            </div>
-            
-            <div class="col-lg-3 col-sm-3">
-                    <h4>Follow us</h4>
-                    <a href="#"><img src="images/facebook.png" alt="facebook"></a>
-                    <a href="#"><img src="images/twitter.png" alt="twitter"></a>
-                    <a href="#"><img src="images/linkedin.png" alt="linkedin"></a>
-                    <a href="#"><img src="images/instagram.png" alt="instagram"></a>
             </div>
 
              <div class="col-lg-3 col-sm-3">
@@ -202,25 +237,33 @@
       </div>
       <div class="row">
         <div class="col-sm-12 login">
-          <form class="" id="login-form" role="form" style="display: block">
+          <form class="" id="login-form" method="post" role="form" style="display: block">
             <div class="form-group">
               <label class="sr-only"></label>
-              <input type="email" class="form-control" name="us" placeholder="Username or Email">
+              <input type="text" class="form-control" name="us" required placeholder="Username or Email">
             </div>
             <div class="form-group">
               <label class="sr-only">Password</label>
-              <input type="password" class="form-control" name="pass" placeholder="Password">
+              <input type="password" class="form-control" required name="pass" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>   
+            <button type="submit" name="signin" class="btn btn-success">Sign in</button>   
           </form>
-          <form class="" id="register-form" role="form" style="display: none">
+          <form class="" id="register-form" role="form" style="display: none" method="post" action="">
             <div class="form-group">
               <label class="sr-only">Username</label>
               <input type="email" class="form-control" name="us" placeholder="Username">
             </div>
             <div class="form-group">
+              <label class="sr-only"></label>
+              <input type="text" class="form-control" name="nm" required placeholder="Nama">
+            </div>
+            <div class="form-group">
               <label class="sr-only">Email address</label>
               <input type="email" class="form-control" name="em" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <label style="padding-top: 12px; padding-left: 10px">+62</label>
+              <input type="number" class="form-control pull-right" name="hp" placeholder="Nomor HP" style="width: 90%">
             </div>
             <div class="form-group">
               <label class="sr-only">Password</label>
@@ -230,7 +273,7 @@
               <label class="sr-only">Confirm Password</label>
               <input type="password" class="form-control" name="cpass" placeholder="Confirm Password">
             </div>
-            <button type="submit" class="btn btn-success">Register</button>   
+            <button type="submit" name="register" class="btn btn-success">Register</button>   
           </form>       
             
         </div>
@@ -283,7 +326,125 @@
       pager.showPage(1);
   });
 
+  var id = '';
 
+  <?php 
+    if(isset($_GET['id'])){
+      ?>
+      var id = <?php echo $_GET['id'] ?>;
+      <?php
+      $id = $_GET['id'];
+      $query = mysqli_query($koneksi, "SELECT * from properti where ID = $id") or die(mysqli_error($koneksi));
 
+      $a = mysqli_fetch_assoc($query);
+      ?>
+      var lat = <?php echo $a['LAT'] ?>, lon = <?php echo $a['LON'] ?>, tipe = "<?php echo $a['TIPE'] ?>";
+
+      if(tipe == 'Rumah')
+        var label = 'R'
+      else
+        var label = 'K'
+      <?php
+    }
+    else{
+      ?>
+      var data = [], i = 0;
+      <?php
+      $query = mysqli_query($koneksi, "SELECT * from properti") or die(mysqli_error($koneksi));
+
+      while($a = mysqli_fetch_assoc($query)){
+        ?>
+        var lat1 = <?php echo $a['LAT'] ?>, lon1 = <?php echo $a['LON'] ?>, content = "<a href='index.php?page=detail&id=<?php echo $a['ID'] ?>'><h6><?php echo $a['NAMA_PROPERTI']; ?></h6></a>";
+        if("<?php echo $a['TIPE'] ?>" == 'Rumah')
+          var label = 'R'
+        else
+          var label = 'K';
+        data[i] = [
+          {
+            coords : {lat : lat1, lng : lon1},
+            label : label,
+            content : content
+          }
+        ];
+        i++
+        <?php
+      }
+    }
+  ?>
+
+  function initMap(){
+
+    console.log(id)
+
+    if(id != ''){
+      var options = {
+        zoom  : 11,
+        center  : {
+          lat: lat,
+          lng: lon
+        }
+      }
+
+      var map = new google.maps.Map(document.getElementById('map'), options);
+
+      // var marker = new google.maps.Marker({
+      //   position : {
+      //     lat: lat,
+      //     lng: lon
+      //   },
+      //   map : map,
+      //   label : 'K'
+      // })
+
+      addMarker({
+        coords  : {lat : lat, lng : lon},
+        label   : label
+      });
+
+      function addMarker(props){
+        var marker = new google.maps.Marker({
+          position : props.coords,
+          map : map,
+          label : props.label
+        })
+      }
+    }
+    else{
+      var options_semua_properti = {
+        zoom  : 12,
+        center  : {
+          lat: -5.1114743,
+          lng: 119.4625408
+        }
+      }
+
+      var map_semua_properti = new google.maps.Map(document.getElementById('semua_properti'), options_semua_properti);
+
+      for(var i = 0; i < data.length; i++){
+        addMarkerSemuaProperti(data[i][0])
+      }
+
+      function addMarkerSemuaProperti(props){
+        // console.log(props.lat);
+        var marker = new google.maps.Marker({
+          position : props.coords,
+          map : map_semua_properti,
+          label : props.label
+        })
+
+        var infoWindow = new google.maps.InfoWindow({
+          content : props.content
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map_semua_properti, marker);
+        });
+      }
+    }    
+  }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD201zgl1ql28BZMqs0lG9Scz0lnV4Fx7Y&callback=initMap">
 </script>
 </html>

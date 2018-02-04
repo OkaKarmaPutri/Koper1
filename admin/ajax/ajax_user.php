@@ -24,8 +24,10 @@
             html += '<tr>'+
               '<td>'+j+'</td>'+
               '<td>'+data[i].username+'</td>'+
+              '<td>'+data[i].nama+'</td>'+
               '<td>'+data[i].email+'</td>'+
               '<td><img src="../images/'+gambar+'" width="100px"></td>'+
+              '<td>'+data[i].hp+'</td>'+
               '<td>'+data[i].role+'</td>'+
               '<td>'+
               '<button class="btn btn-warning item-edit" data="'+data[i].id+'">Edit</button>'+
@@ -44,11 +46,13 @@
   }
 
   function removeError(){
-    var us = $('input[name=us]'), em = $('input[name=em]'), ps = $('input[name=ps]'), reps = $('input[name=reps]');
+    var us = $('input[name=us]'), em = $('input[name=em]'), ps = $('input[name=ps]'), reps = $('input[name=reps]'), nama = $('input[name=nama]'), hp = $('input[name=hp]');
     us.parent().parent().removeClass('has-error');
     em.parent().parent().removeClass('has-error');
     ps.parent().parent().removeClass('has-error');
     reps.parent().parent().removeClass('has-error');
+    nama.parent().parent().removeClass('has-error');
+    hp.parent().parent().removeClass('has-error');
     $('#cek_us').hide();
     $('#cek_em').hide();
     $('#formUser')[0].reset();
@@ -56,7 +60,6 @@
   }
 
   $('#addData').click(function(){
-    $('input[name=result]').val('0');
     $('#formUser').attr('action', 'insert');
     $('.foto').hide();
     removeError();
@@ -65,10 +68,24 @@
 
   $('#saveUser').click(function(){
     //var data = $('#formUser').serialize();
-    var us = $('input[name=us]'), em = $('input[name=em]'), ps = $('input[name=ps]'), reps = $('input[name=reps]'), data = new FormData(document.getElementById("formUser")), aksi = $('#formUser').attr('action'), email = em.val(), result = 0;
+    var us = $('input[name=us]'), em = $('input[name=em]'), ps = $('input[name=ps]'), reps = $('input[name=reps]'), nama = $('input[name=nama]'), hp = $('input[name=hp]'), data = new FormData(document.getElementById("formUser")), aksi = $('#formUser').attr('action'), email = em.val(), result = 0;
     //data = data + "&crud=insert&table=user&ft=" + ft;
     data.append("crud", aksi);
     data.append("table", 'user');
+
+    if(hp.val() == '')
+      hp.parent().parent().addClass('has-error');
+    else{
+      hp.parent().parent().removeClass('has-error');
+      result -= -1;
+    }
+
+    if(nama.val() == '')
+      nama.parent().parent().addClass('has-error');
+    else{
+      nama.parent().parent().removeClass('has-error');
+      result -= -1;
+    }
 
     if(us.val() == ""){
       us.parent().parent().addClass('has-error');
@@ -134,7 +151,9 @@
       }
     }
 
-    if(result == 3){
+    console.log(result)
+
+    if(result == 5){
       $.ajax({
         url : 'models/crud_user.php',
         method : 'post',
@@ -180,6 +199,9 @@
         else
           $('.foto').find('img').attr('src', '../images/'+data[0].id+'/'+data[0].gambar);
         $('[name=ft_lama]').val(data[0].gambar);
+        $('input[name=nama]').val(data[0].nama);
+        $('input[name=hp]').val(data[0].hp);
+
         //console.log(res);
       },
       error : function(){
@@ -209,7 +231,7 @@
         },
         success : function(res){
           //console.log(res);
-          swal("Deleted!", "Your imaginary file has been deleted.", "success");
+          swal("Deleted!", "Your imaginary data has been deleted.", "success");
           viewUser();
         }
       })

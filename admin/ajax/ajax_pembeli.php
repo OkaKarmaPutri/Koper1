@@ -18,7 +18,6 @@
 	            '<td>'+j+'</td>'+
 	            '<td>'+data[i].nama+'</td>'+
 	            '<td>'+data[i].alamat+'</td>'+
-	            '<td>'+data[i].jns+'</td>'+
 	            '<td>'+data[i].no_hp+'</td>'+
 	            '<td>'+data[i].email+'</td>'+
 	            '<td>'+
@@ -38,11 +37,10 @@
 	}
 
 	function removeError(){
-	    var nm = $('input[name=nm]'), em = $('input[name=em]'), al = $('textarea[name=al]'), jns = $('select[name=jns]'), hp = $('input[name=hp]');
+	    var nm = $('input[name=nm]'), em = $('input[name=em]'), al = $('textarea[name=al]'), hp = $('input[name=hp]');
 	    nm.parent().parent().removeClass('has-error');
 	    em.parent().parent().removeClass('has-error');
 	    al.parent().parent().removeClass('has-error');
-	    jns.parent().parent().removeClass('has-error');
 	    hp.parent().parent().removeClass('has-error');
 	    $('#cek_em').hide();
 	    $('#modal').modal('show');
@@ -56,7 +54,7 @@
 	})
 
 	$('#save').click(function(){
-	    var data = $('#form').serialize(), nm = $('input[name=nm]'), em = $('input[name=em]'), al = $('textarea[name=al]'), jns = $('select[name=jns]'), hp = $('input[name=hp]'), result = 0, aksi = $('#form').attr('action'), email = em.val();
+	    var data = $('#form').serialize(), nm = $('input[name=nm]'), em = $('input[name=em]'), al = $('textarea[name=al]'), hp = $('input[name=hp]'), result = 0, aksi = $('#form').attr('action'), email = em.val();
 	    data = data + "&crud="+aksi;
 
 	    console.log(data);
@@ -91,12 +89,6 @@
 	      result -= -1;
 	    }
 
-	    if(jns.val() == "--Pilih--")
-	      jns.parent().parent().addClass('has-error');
-	    else{
-	      jns.parent().parent().removeClass('has-error');
-	      result -= -1;
-	    }
 	    console.log(hp.val());
 	    if(hp.val() == '')
 	      hp.parent().parent().addClass('has-error');
@@ -107,7 +99,7 @@
 
 	    console.log(result);
 
-	    if(result == 5){
+	    if(result == 4){
 	      $.ajax({
 	        url : 'models/crud_pembeli.php',
 	        method : 'post',
@@ -144,7 +136,6 @@
 	        $('input[name=nm]').val(data[0].nama);
 	        $('textarea[name=al]').val(data[0].alamat);
 	        $('input[name=em]').val(data[0].email);
-	        $('select[name=jns]').val(data[0].jns);
 	        $('input[name=hp]').val(data[0].no_hp);
 	        console.log(res);
 	      },
@@ -174,7 +165,7 @@
 	        },
 	        success : function(res){
 	          //console.log(res);
-	          swal("Deleted!", "Your imaginary file has been deleted.", "success");
+	          swal("Deleted!", "Your imaginary data has been deleted.", "success");
 	          viewPembeli();
 	        }
 	      })

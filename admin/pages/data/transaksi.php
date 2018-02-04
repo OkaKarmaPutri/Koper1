@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Detail Properti
+        Data Transaksi
       </h1>
       <!--ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -17,6 +17,8 @@
 
           <div class="box">
             <div class="box-header">
+              <p></p>
+              <button class="btn btn-primary" id="addData">Insert Data</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -25,27 +27,25 @@
                 <tr>
                   <th>No</th>
                   <th>Username</th>
-                  <th>Jumlah Kamar</th>
-                  <th>Kamar Tersedia</th>
-                  <th>Alamat</th>
-                  <th>Gambar</th>
-                  <th>Latitude</th>
-                  <th>Longitude</th>
+                  <th>Pembeli</th>
+                  <th>Nama Properti</th>
+                  <th>Status</th>
+                  <th>No Rekening</th>
+                  <th width="100">Aksi</th>
                 </tr>
                 </thead>
-                <tbody class="detailData">
+                <tbody class="data">
                 
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>No</th>
                   <th>Username</th>
-                  <th>Jumlah Kamar</th>
-                  <th>Kamar Tersedia</th>
-                  <th>Alamat</th>
-                  <th>Gambar</th>
-                  <th>Latitude</th>
-                  <th>Longitude</th>
+                  <th>Pembeli</th>
+                  <th>Nama Properti</th>
+                  <th>Status</th>
+                  <th>No Rekening</th>
+                  <th width="100">Aksi</th>
                 </tr>
                 </tfoot>
               </table>
