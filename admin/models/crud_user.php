@@ -110,6 +110,7 @@
 	}
 
 	else if($crud == 'update'){
+		echo json_encode($_POST);
 		$hp = $_POST['hp'];
 		$nama = $_POST['nama'];
 		$us = $_POST['us'];

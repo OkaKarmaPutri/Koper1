@@ -419,6 +419,7 @@
       }
 
       var map_semua_properti = new google.maps.Map(document.getElementById('semua_properti'), options_semua_properti);
+      // alert(JSON.stringify(data))
 
       for(var i = 0; i < data.length; i++){
         addMarkerSemuaProperti(data[i][0])
